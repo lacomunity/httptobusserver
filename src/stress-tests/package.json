@@ -1,0 +1,11 @@
+{
+  "name": "RestUtilsSpike",
+  "version": "0.0.1",
+  "description": "",
+  "main": "httpToBusServer.js",
+  "author": "eyeOS",
+  "homepage": "http://www.eyeos.com/",
+  "dependencies": {
+    "RestUtils": "*"
+  }
+}

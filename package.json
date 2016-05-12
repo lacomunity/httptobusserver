@@ -1,0 +1,31 @@
+{
+  "name": "httptobusserver",
+  "version": "0.0.128",
+  "description": "Http to bus Server :33",
+  "main": "./src/httpToBusServer.js",
+  "author": "eyeOS",
+  "homepage": "http://www.eyeos.com/",
+  "dependencies": {
+    "eyeos-service-ready-notify": "*",
+    "hashtable": "0.5.2",
+    "node-uuid": "1.4.2",
+    "eyeos-amqp": "*",
+    "eyeos-auth": "*",
+    "log2out": "*"
+  },
+  "devDependencies": {
+    "eyeos-gruntfile": "*",
+    "chai": "1.8.0",
+    "sinon": "1.7.3",
+    "mocha": "1.20.1",
+    "grunt": "0.4.5",
+    "grunt-init": "0.2.1",
+    "grunt-shell": "0.7.0",
+    "grunt-mocha-test": "0.11.0"
+  },
+  "microservices": [
+    "mongo.service.consul:27017",
+    "rabbit.service.consul:5672"
+  ],
+  "license": "AGPL-3.0"
+}

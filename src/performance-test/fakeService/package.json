@@ -1,0 +1,14 @@
+{
+  "name": "fakeService",
+  "version": "0.0.1",
+  "description": "Fake service for performance tests",
+  "main": "./fakeService.js",
+  "author": "eyeOS",
+  "homepage": "http://www.eyeos.com/",
+  "dependencies": {
+    "express": "~4.12.3",
+    "body-parser": "~1.12.2",
+    "eyeos-BusToHttp": "0.0.19"
+  },
+  "devDependencies": {}
+}
