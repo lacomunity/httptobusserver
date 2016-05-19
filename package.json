@@ -7,7 +7,6 @@
   "homepage": "http://www.eyeos.com/",
   "dependencies": {
     "eyeos-service-ready-notify": "*",
-    "hashtable": "2.0.1",
     "node-uuid": "1.4.2",
     "eyeos-amqp": "*",
     "eyeos-auth": "*",

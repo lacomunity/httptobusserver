@@ -85,9 +85,9 @@ suite('HTTPServer', function () {
 			rawHTTPServer.emit("socketClosed", id);
 		}
 		
-		test('Should remove previously stored TID from TIDMap ', sinon.test(function(){
+		test('Should.delete previously stored TID from TIDMap ', sinon.test(function(){
 			var correlationId = 'id';
-			sut.TIDMap.put(correlationId, 'myTID');
+			sut.TIDMap.set(correlationId, 'myTID');
 			execute(correlationId);
 			assert.isUndefined(sut.TIDMap.get(correlationId));
 		}));
@@ -112,13 +112,13 @@ suite('HTTPServer', function () {
 			};
 			correlationId = 'anId';
 			sinon.stub(fakeResponse, 'getId').returns(correlationId);
-			sut.TIDMap.put(correlationId, tid);
+			sut.TIDMap.set(correlationId, tid);
 		});
 		function exercise() {
 			sut.send(fakeResponse);
 		}
 
-		test("should remove previously stored TID from TIDMap", sinon.test(function(){
+		test("should.delete previously stored TID from TIDMap", sinon.test(function(){
 			exercise();
 			assert.isUndefined(sut.TIDMap.get(correlationId));
 		}));

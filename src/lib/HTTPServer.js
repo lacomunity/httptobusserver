@@ -21,14 +21,13 @@ var EventEmitter = require('events').EventEmitter;
 var RawHTTPServer = require("./rawHTTPServer");
 var HTTPRequest = require("./HTTPRequest");
 var logger = require('log2out').getLogger('HTTPToBus');
-var HashMap = require("hashtable");
 var RawHTTPMessage = require("./rawHTTPMessage");
 var HTTPResponse = require("./HTTPResponse");
 
 var HTTPServer = function(rawHTTPServer, HTTPTransactionRequestFactory) {
 	this.rawHTTPServer = rawHTTPServer || new RawHTTPServer();
 	this.HTTPTransactionRequestFactory = HTTPTransactionRequestFactory || require('./HTTPTransactionRequestFactory');
-	this.TIDMap = new HashMap();
+	this.TIDMap = new Map();
 };
 
 HTTPServer.prototype.listen = function(port) {
@@ -38,12 +37,12 @@ HTTPServer.prototype.listen = function(port) {
 		logger.debug("New request received: ", data, id);
 		var httpRequest = new HTTPRequest(data, id);
 		var httpTransactionRequest = self.HTTPTransactionRequestFactory.getInstance(httpRequest);
-		self.TIDMap.put(id, httpTransactionRequest.getTIDHeader());
+		self.TIDMap.set(id, httpTransactionRequest.getTIDHeader());
 		self.emit("request", httpTransactionRequest);
 	});
 
 	this.rawHTTPServer.on("socketClosed", function(id){
-		self.TIDMap.remove(id);
+		self.TIDMap.delete(id);
 	});
 };
 
@@ -51,7 +50,7 @@ HTTPServer.prototype.send = function(response){
 	logger.debug("Sending response: ", response);
 
 	var tid = this.TIDMap.get(response.getId());
-	this.TIDMap.remove(response.getId());
+	this.TIDMap.delete(response.getId());
 
 	var rawHTTPMessageWithTID = new RawHTTPMessage(response.getResponse());
 	rawHTTPMessageWithTID.addHeader(tid);
