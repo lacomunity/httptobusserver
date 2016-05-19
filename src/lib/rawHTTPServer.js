@@ -25,7 +25,7 @@ var ObjectMap = require('./Map');
 
 var RawHTTPServer = function (net, uuid) {
 	this.net = net || require("net");
-	this.map = new Map();
+	this.map = null;
 	if (typeof Map != 'undefined') {
 		this.map = new Map();
 	} else {
