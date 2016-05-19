@@ -21,10 +21,17 @@ var EventEmitter = require('events').EventEmitter;
 var Uuid = require('node-uuid');
 var logger = require('log2out').getLogger('rawHTTPServer');
 var RawHTTPMessage = require('./rawHTTPMessage');
+var ObjectMap = require('./Map');
 
 var RawHTTPServer = function (net, uuid) {
 	this.net = net || require("net");
 	this.map = new Map();
+	if (typeof Map != 'undefined') {
+		this.map = new Map();
+	} else {
+		this.map = new ObjectMap();
+	}
+
 	this.uuid = uuid || Uuid;
 };
 

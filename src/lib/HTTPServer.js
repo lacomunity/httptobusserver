@@ -23,11 +23,18 @@ var HTTPRequest = require("./HTTPRequest");
 var logger = require('log2out').getLogger('HTTPToBus');
 var RawHTTPMessage = require("./rawHTTPMessage");
 var HTTPResponse = require("./HTTPResponse");
+var ObjectMap = require('./Map');
 
 var HTTPServer = function(rawHTTPServer, HTTPTransactionRequestFactory) {
 	this.rawHTTPServer = rawHTTPServer || new RawHTTPServer();
 	this.HTTPTransactionRequestFactory = HTTPTransactionRequestFactory || require('./HTTPTransactionRequestFactory');
-	this.TIDMap = new Map();
+	this.TIDMap = null;
+
+	if (typeof Map != 'undefined') {
+		this.TIDMap = new Map();
+	} else {
+		this.TIDMap = new ObjectMap();
+	}
 };
 
 HTTPServer.prototype.listen = function(port) {
