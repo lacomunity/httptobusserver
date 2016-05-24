@@ -1,7 +1,8 @@
 FROM mhart/alpine-node:6.2
 
-ENV InstallationDir /var/service/
 ENV WHATAMI camel
+
+ENV InstallationDir /var/service/
 
 WORKDIR ${InstallationDir}
 
