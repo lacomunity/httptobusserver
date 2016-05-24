@@ -18,14 +18,20 @@
 */
 
 var EventEmitter = require('events').EventEmitter;
-var HashMap = require("hashtable");
 var Uuid = require('node-uuid');
 var logger = require('log2out').getLogger('rawHTTPServer');
 var RawHTTPMessage = require('./rawHTTPMessage');
+var ObjectMap = require('./Map');
 
 var RawHTTPServer = function (net, uuid) {
 	this.net = net || require("net");
-	this.map = new HashMap();
+	this.map = null;
+	if (typeof Map != 'undefined') {
+		this.map = new Map();
+	} else {
+		this.map = new ObjectMap();
+	}
+
 	this.uuid = uuid || Uuid;
 };
 
@@ -65,7 +71,7 @@ RawHTTPServer.prototype.listen = function (port) {
 				regex = /\nContent-Length:\s?(-?\d+)/i;
 				match = regex.exec(asciiRequest);
 				if (!match) {
-					self.map.put(id, sock);
+					self.map.set(id, sock);
 					alreadyEmitted = true;
 					self.emit("request", request, id);
 				} else {
@@ -74,7 +80,7 @@ RawHTTPServer.prototype.listen = function (port) {
 					var bodySize = asciiRequest.length - headerOffset - lineBreakSize;
 
 					if (bodySize >= contentLength) {
-						self.map.put(id, sock);
+						self.map.set(id, sock);
 						alreadyEmitted = true;
 						self.emit("request", request, id);
 					}
@@ -84,12 +90,12 @@ RawHTTPServer.prototype.listen = function (port) {
 		});
 
 		sock.on('close', function () {
-			logger.info('HTTP Socket closed, so remove: ', id, 'from HashMap');
+			logger.info('HTTP Socket closed, so.delete: ', id, 'from HashMap');
 			self._closeSocket(id);
 		})
 
 		sock.on('error', function(error) {
-			logger.info('HTTP Socket error, so remove: ', id, 'from HashMap');
+			logger.info('HTTP Socket error, so.delete: ', id, 'from HashMap');
 			logger.info(error.description);
 			self._closeSocket(id);
 		});
@@ -99,7 +105,7 @@ RawHTTPServer.prototype.listen = function (port) {
 };
 
 RawHTTPServer.prototype._closeSocket = function (id) {
-	this.map.remove(id);
+	this.map.delete(id);
 	this.emit("socketClosed", id);
 };
 

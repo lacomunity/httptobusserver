@@ -1,13 +1,12 @@
 {
   "name": "httptobusserver",
-  "version": "0.0.129",
+  "version": "0.0.130",
   "description": "Http to bus Server :33",
   "main": "./src/httpToBusServer.js",
   "author": "eyeOS",
   "homepage": "http://www.eyeos.com/",
   "dependencies": {
     "eyeos-service-ready-notify": "*",
-    "hashtable": "0.5.2",
     "node-uuid": "1.4.2",
     "eyeos-amqp": "*",
     "eyeos-auth": "*",
