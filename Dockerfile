@@ -8,8 +8,6 @@ WORKDIR ${InstallationDir}
 
 CMD eyeos-run-server --serf /var/service/src/httpToBusServer.js
 
-RUN mkdir -p ${InstallationDir}/src/ && touch ${InstallationDir}src/httptobus-installed.js
-
 COPY . ${InstallationDir}
 
 RUN apk update && apk add --no-cache curl make gcc g++ git python dnsmasq bash && \
