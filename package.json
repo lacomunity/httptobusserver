@@ -1,6 +1,6 @@
 {
   "name": "httptobusserver",
-  "version": "0.0.130",
+  "version": "0.0.135",
   "description": "Http to bus Server :33",
   "main": "./src/httpToBusServer.js",
   "author": "eyeOS",
