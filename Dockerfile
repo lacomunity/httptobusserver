@@ -1,17 +1,8 @@
-FROM docker-registry.eyeosbcn.com/alpine6-node-base
+FROM php:5.6-cli
 
-ENV WHATAMI camel
+COPY . /
 
-ENV InstallationDir /var/service/
+RUN apt-get update && apt-get install -y npm node
+RUN npm install
 
-WORKDIR ${InstallationDir}
-
-CMD eyeos-run-server --serf /var/service/src/httpToBusServer.js
-
-COPY . ${InstallationDir}
-
-RUN /scripts-base/buildDependencies.sh --production --install && \
-    npm install --verbose --production && \
-    npm cache clean && \
-    /scripts-base/buildDependencies.sh --production --purgue && \
-    rm -fr /etc/ssl /var/cache/apk/* /tmp/*
+CMD ["/start-dev.sh"]

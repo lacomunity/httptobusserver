@@ -1,3 +1,3 @@
 #! /bin/sh
 
-node src/httpToBusServer.js
+nodejs src/httpToBusServer.js

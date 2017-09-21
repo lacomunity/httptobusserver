@@ -21,9 +21,9 @@ var settings = {
 	singleWorker: process.env.HTTP_TO_BUS_SINGLE_WORKER === 'true' || false,
 	httpPort: process.env.HTTP_TO_BUS_PORT || 8196,
 	busPort: process.env.HTTP_TO_BUS_AMQP_PORT || 5672,
-	busHost: process.env.HTTP_TO_BUS_AMQP_HOST || "rabbit.service.consul",
+	busHost: process.env.HTTP_TO_BUS_AMQP_HOST || "172.17.0.1",
 	login: process.env.EYEOS_BUS_MASTER_USER || "guest",
-	password: process.env.EYEOS_BUS_MASTER_PASSWD || "somepassword",
+	password: process.env.EYEOS_BUS_MASTER_PASSWD || "guest",
 	busHeartbeat: parseInt(process.env.HTTP_TO_BUS_AMQP_HEARTBEAT) || 1,
 	prefetchCount: +process.env.HTTP_TO_BUS_PREFETCH_COUNT || 0,
 	permissions: {

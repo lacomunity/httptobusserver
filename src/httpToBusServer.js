@@ -19,7 +19,6 @@
 */
 
 var settings = require('./lib/settings.js');
-var Notifier = require('eyeos-service-ready-notify');
 var logger = require('log2out').getLogger('HTTPToBus');
 var Controller = require("./lib/controller");
 
@@ -33,8 +32,6 @@ var TIDHeader = require('./lib/TIDHeader');
 
 if(require.main === module) {
 	logger.info(settings);
-	var notifier = new Notifier();
-	notifier.registerService();
 
 	var controller = new Controller();
 	controller.start();
